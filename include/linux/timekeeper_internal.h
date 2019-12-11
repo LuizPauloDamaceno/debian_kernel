@@ -31,8 +31,8 @@ struct tk_read_base {
 	struct clocksource	*clock;
 	cycle_t			mask;
 	cycle_t			cycle_last;
-	u32			mult;
-	u32			shift;
+	u64			mult;
+	u64			shift;
 	u64			xtime_nsec;
 	ktime_t			base;
 };
@@ -108,8 +108,8 @@ struct timekeeper {
 	/* Difference between accumulated time and NTP time in ntp
 	 * shifted nano seconds. */
 	s64			ntp_error;
-	u32			ntp_error_shift;
-	u32			ntp_err_mult;
+	u64			ntp_error_shift;
+	u64			ntp_err_mult;
 #ifdef CONFIG_DEBUG_TIMEKEEPING
 	long			last_warning;
 	/*
@@ -132,7 +132,7 @@ extern void update_vsyscall_tz(void);
 #elif defined(CONFIG_GENERIC_TIME_VSYSCALL_OLD)
 
 extern void update_vsyscall_old(struct timespec *ts, struct timespec *wtm,
-				struct clocksource *c, u32 mult,
+				struct clocksource *c, u64 mult,
 				cycle_t cycle_last);
 extern void update_vsyscall_tz(void);
 
